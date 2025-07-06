@@ -101,3 +101,30 @@
           - "=== Deployment Complete ==="
           - "Your Flask app is running at: http://{{ inventory_hostname }}:80"
           - "Container ID: {{ container_status.stdout_lines[1].split()[0] if container_status.stdout_lines | length > 1 else 'Container not found' }}"
+
+- name: Set up Docker and deploy app
+  hosts: web
+  become: true
+  tasks:
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+        update_cache: yes
+
+    - name: Enable and start Docker
+      service:
+        name: docker
+        enabled: true
+        state: started
+
+    - name: Copy app files
+      copy:
+        src: ../app/
+        dest: /home/azureuser/flaskapp
+
+    - name: Build and run Flask container
+      shell: |
+        cd /home/azureuser/flaskapp
+        docker build -t flaskapp .
+        docker run -d -p 5000:5000 flaskapp

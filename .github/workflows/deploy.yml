@@ -15,9 +15,10 @@ jobs:
       - name: Build Docker image
         run: docker build -t $DOCKER_IMAGE ./app
 
+      # FIXED DOCKER LOGIN
       - name: Login to Docker Hub
         run: |
-          docker login -u ${{ secrets.AZURE_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u "${{ secrets.AZURE_USERNAME }}" --password-stdin
 
       - name: Push Docker image
         run: docker push $DOCKER_IMAGE
@@ -41,7 +42,7 @@ jobs:
 
       - name: Azure Login
         run: |
-          az login -u ${{ secrets.AZURE_USERNAME }} -p ${{ secrets.AZURE_PASSWORD }}
+          az login -u "${{ secrets.AZURE_USERNAME }}" -p "${{ secrets.AZURE_PASSWORD }}"
           az account show
 
       - name: Terraform Init
@@ -50,7 +51,7 @@ jobs:
       - name: Terraform Apply
         run: terraform apply -auto-approve ./terraform
         env:
-          TF_VAR_admin_username: ${{ secrets.AZURE_USERNAME }}
+          TF_VAR_admin_username: "${{ secrets.AZURE_USERNAME }}"
           TF_VAR_ssh_public_key: "${{ secrets.SSH_PUBLIC_KEY }}"
 
       - name: Get Public IP
@@ -65,7 +66,7 @@ jobs:
         run: |
           ansible-playbook \
             -i "${{ env.PUBLIC_IP }}," \
-            -u ${{ secrets.AZURE_USERNAME }} \
+            -u "${{ secrets.AZURE_USERNAME }}" \
             --private-key ~/.ssh/azure-container-key \
             -e "docker_image=$DOCKER_IMAGE" \
             ansible/docker.yml

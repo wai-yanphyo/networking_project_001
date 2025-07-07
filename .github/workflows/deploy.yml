@@ -39,14 +39,18 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/azure-container-key
           chmod 600 ~/.ssh/azure-container-key
+          # Generate public key from private if needed
+          ssh-keygen -y -f ~/.ssh/azure-container-key > ~/.ssh/azure-container-key.pub
 
-      # Service Principal Login (REQUIRES NEW SECRETS)
-      - name: Azure Login
+      # Use Azure CLI with SSH certificate authentication
+      - name: Setup Azure CLI SSH Login
         run: |
-          az login --service-principal \
-            -u "${{ secrets.AZURE_CLIENT_ID }}" \
-            -p "${{ secrets.AZURE_CLIENT_SECRET }}" \
-            --tenant "${{ secrets.AZURE_TENANT_ID }}"
+          az extension add --name ssh --upgrade
+          az config set extension.use_dynamic_install=yes_without_prompt
+
+      - name: Azure Login with SSH Certificate
+        run: |
+          az login --username "${{ secrets.AZURE_USERNAME }}" --identity
           az account show
 
       - name: Terraform Init
@@ -56,7 +60,7 @@ jobs:
         run: terraform apply -auto-approve ./terraform
         env:
           TF_VAR_admin_username: "${{ secrets.AZURE_VM_USERNAME }}"
-          TF_VAR_ssh_public_key: "${{ secrets.SSH_PUBLIC_KEY }}"
+          TF_VAR_ssh_public_key: "$(cat ~/.ssh/azure-container-key.pub)"
 
       - name: Get Public IP
         run: |

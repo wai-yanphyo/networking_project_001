@@ -71,7 +71,7 @@ HTML_TEMPLATE = """
             border-radius: 15px;
             margin: 1.5rem 0;
             font-style: italic;
-            font-size: 1.1rem;
+            font-size: 2.1rem;
             box-shadow: 0 4px 15px rgba(255, 107, 107, 0.3);
             border: 1px solid rgba(255, 255, 255, 0.3);
         }
@@ -124,11 +124,11 @@ HTML_TEMPLATE = """
         <div class="subtitle">Azure Automated Deployment Complete</div>
         
         <div class="success-badge">
-            Congratulations Wai Yan Phyp!
+            Congratulations, Myself!
         </div>
         
         <div class="professor-thanks">
-            Special thanks to my Professor Kingsley Ibomo for his guidance and support
+            Special thanks to my Professor Kingsley Ibomo for your guidance and support
         </div>
 
         <div class="features">
@@ -139,7 +139,7 @@ HTML_TEMPLATE = """
             
             <div class="feature-card">
                 <h3>Auto Deploy</h3>
-                <p>GitHub Actions automatically builds and deploys your code</p>
+                <p>GitHub Actions automatically builds and deploys the code</p>
             </div>
             
             <div class="feature-card">
@@ -154,7 +154,7 @@ HTML_TEMPLATE = """
         </div>
 
         <div class="footer">
-            <p>Your networking project is now live and running!</p>
+            <p>My networking project is now live and running!</p>
             <p><small>Powered by Flask • Docker • Azure • GitHub Actions</small></p>
         </div>
     </div>

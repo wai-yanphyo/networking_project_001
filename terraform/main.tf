@@ -89,7 +89,7 @@ resource "azurerm_linux_virtual_machine" "main" {
 
   admin_ssh_key {
     username   = "azureuser"
-    public_key = file("C:/Users/User/.ssh/azure-container-key.pub")
+    public_key = file("~/.ssh/azure-container-key.pub")
   }
 
   os_disk {

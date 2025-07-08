@@ -4,7 +4,7 @@ provider "azurerm" {
 }
 
 resource "azurerm_resource_group" "main" {
-  name     = "test-container-rg"
+  name     = "final-container-007"
   location = "eastus"
 }
 

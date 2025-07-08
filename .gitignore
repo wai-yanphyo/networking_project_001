@@ -1,6 +1,7 @@
-# Ignore Terraform plugin/cache state
-**/.terraform/*
-*.tfstate
-*.tfstate.backup
-*.log
-*.exe
+# Terraform
+.terraform/
+.terraform.lock.hcl
+terraform.tfstate
+terraform.tfstate.backup
+*.tfvars
+*.tfplan

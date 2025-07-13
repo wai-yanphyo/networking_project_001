@@ -180,6 +180,9 @@ app = Flask(__name__)
 #         "technology": ["Flask", "Docker", "GitHub Actions"]
 #     }
 
+@app.route('/')
+def home():
+    return "Hello World ! My Name  is Wai Yan Phyo";
+
 if __name__ == '__main__':
-    print ("Hello World ! My Name  is Wai Yan Phyo");
     app.run(host='0.0.0.0', port=80, debug=False)

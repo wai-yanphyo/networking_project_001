@@ -120,15 +120,15 @@ HTML_TEMPLATE = """
 </head>
 <body>
     <div class="container">
-        <h1 class="pulse">Deployment Success!</h1>
+        <h1 class="pulse">The End</h1>
         <div class="subtitle">Azure Automated Deployment Complete</div>
         
         <div class="success-badge">
-            Congratulations, Wai Yan Oo !
+            Congratulations, Wai Yan Phyo !
         </div>
         
         <div class="professor-thanks">
-            Special thanks to my Professor Kingsley Ibomo for your guidance and support
+            Special thanks to Our Professor Kingsley Ibomo for your guidance and support
         </div>
 
         <div class="features">

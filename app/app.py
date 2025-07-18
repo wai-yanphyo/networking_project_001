@@ -124,7 +124,7 @@ HTML_TEMPLATE = """
         <div class="subtitle">Azure Automated Deployment Complete</div>
         
         <div class="success-badge">
-            Congratulations, Wai Yan!
+            Congratulations, Wai Yan Phyo!
         </div>
         
         <div class="professor-thanks">
